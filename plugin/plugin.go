@@ -48,10 +48,11 @@ get:
   name: %q
   path: ""`, secretYaml, secret, secret)
 	}
+	data := strings.ReplaceAll(req.Config.Data, "\n...\n", "") + secretYaml
 
 	// returns the modified configuration file.
 	return &drone.Config{
-		Data: req.Config.Data + secretYaml,
+		Data: data,
 	}, nil
 }
 
