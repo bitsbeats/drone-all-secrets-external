@@ -55,5 +55,5 @@ func main() {
 
 func healthz(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
-	io.WriteString(w, "OK")
+	_, _ = io.WriteString(w, "OK")
 }

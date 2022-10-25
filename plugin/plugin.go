@@ -39,7 +39,7 @@ func (p *plugin) Convert(ctx context.Context, req *converter.Request) (*drone.Co
 	logrus.Debugf("%s injected: %+v", req.Repo.Slug, secrets)
 
 	secretYaml := ""
-	for secret, _ := range secrets {
+	for secret := range secrets {
 		secretYaml = fmt.Sprintf(`%s
 ---
 kind: secret
@@ -72,10 +72,6 @@ func findSecrets(config string, output *map[string]struct{}) error {
 	}
 	findSecretsInNode(&data, output)
 	return nil
-}
-
-type fromSecret struct {
-	fromSecret string `yaml:"from_secret"`
 }
 
 func findSecretsInNode(node *yaml.Node, output *map[string]struct{}) {
