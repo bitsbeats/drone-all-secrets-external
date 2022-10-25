@@ -1,4 +1,8 @@
+# drone-all-secrets-external
+
 A conversion extension to Modifies drone pipelines to load all secrets from external provider.. _Please note this project requires Drone server version 1.4 or higher._
+
+Useful if you want _all_ your secrets to come from an external provider.
 
 ## Installation
 
