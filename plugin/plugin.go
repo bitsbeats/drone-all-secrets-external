@@ -97,7 +97,7 @@ func findSecretsInNode(node *yaml.Node, output *map[string]struct{}) {
 		for i := 0; i < (len(node.Content) - 1); i += 2 {
 			key := node.Content[i]
 			value := node.Content[i+1]
-			if key.Value == "from_secret" {
+			if key.Value == "from_secret" && value.Kind == yaml.ScalarNode {
 				(*output)[value.Value] = struct{}{}
 			} else {
 				findSecretsInNode(value, output)
