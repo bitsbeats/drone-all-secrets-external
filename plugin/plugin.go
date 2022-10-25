@@ -29,6 +29,7 @@ func (p *plugin) Convert(ctx context.Context, req *converter.Request) (*drone.Co
 	// get the configuration file from the request.
 	configs := splitConfigs(req.Config.Data)
 
+	// load secrets
 	secrets := map[string]struct{}{}
 	for _, config := range configs {
 		err := findSecrets(config, &secrets)
@@ -38,6 +39,7 @@ func (p *plugin) Convert(ctx context.Context, req *converter.Request) (*drone.Co
 	}
 	logrus.Debugf("%s injected: %+v", req.Repo.Slug, secrets)
 
+	// template and append to data
 	secretYaml := ""
 	for secret := range secrets {
 		secretYaml = fmt.Sprintf(`%s
@@ -56,6 +58,7 @@ get:
 	}, nil
 }
 
+// splitConfigs splits multiple drone pipelines into an array of singles
 func splitConfigs(config string) []string {
 	configs := documentSeperator.Split(config, -1)
 	for i := range configs {
@@ -64,6 +67,7 @@ func splitConfigs(config string) []string {
 	return configs
 }
 
+// findSecrets gathers all secret names in a drone pipeline
 func findSecrets(config string, output *map[string]struct{}) error {
 	var data yaml.Node
 	err := yaml.Unmarshal([]byte(config), &data)
@@ -74,6 +78,7 @@ func findSecrets(config string, output *map[string]struct{}) error {
 	return nil
 }
 
+// findSecretsInNode parses a yaml tree for a `from_secret: string_value`
 func findSecretsInNode(node *yaml.Node, output *map[string]struct{}) {
 	switch node.Kind {
 	case yaml.DocumentNode:
