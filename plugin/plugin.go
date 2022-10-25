@@ -18,6 +18,14 @@ import (
 
 var documentSeperator = regexp.MustCompile(`(?m)^---($| )`)
 
+const secretTemplate = `%s
+---
+kind: secret
+name: %q
+get:
+  name: %q
+  path: ""`
+
 // New returns a new conversion plugin.
 func New() converter.Plugin {
 	return &plugin{}
@@ -42,13 +50,7 @@ func (p *plugin) Convert(ctx context.Context, req *converter.Request) (*drone.Co
 	// template and append to data
 	secretYaml := ""
 	for secret := range secrets {
-		secretYaml = fmt.Sprintf(`%s
----
-kind: secret
-name: %q
-get:
-  name: %q
-  path: ""`, secretYaml, secret, secret)
+		secretYaml = fmt.Sprintf(secretTemplate, secretYaml, secret, secret)
 	}
 	data := strings.ReplaceAll(req.Config.Data, "\n...\n", "") + secretYaml
 
