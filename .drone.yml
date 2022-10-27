@@ -13,7 +13,7 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    repo: thomn/drone-all-secrets-external
+    repo: thomn/drone-convert-all-secrets-external
     username:
       from_secret: docker_username
     password:
