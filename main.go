@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	"github.com/drone/drone-go/plugin/converter"
-	"github.com/thomn/drone-all-secrets-external/plugin"
+	"github.com/thomn/drone-convert-all-secrets-external/plugin"
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/kelseyhightower/envconfig"

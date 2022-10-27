@@ -1,4 +1,4 @@
-module github.com/thomn/drone-all-secrets-external
+module github.com/thomn/drone-convert-all-secrets-external
 
 go 1.17
 

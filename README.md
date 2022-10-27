@@ -1,4 +1,4 @@
-# drone-all-secrets-external
+# drone-convert-all-secrets-external
 
 A conversion extension to Modifies drone pipelines to load all secrets from external provider.. _Please note this project requires Drone server version 1.4 or higher._
 
@@ -21,7 +21,7 @@ $ docker run -d \
   --env=DRONE_DEBUG=true \
   --env=DRONE_SECRET=bea26a2221fd8090ea38720fc445eca6 \
   --restart=always \
-  --name=converter thomn/drone-all-secrets-external
+  --name=converter thomn/drone-convert-all-secrets-external
 ```
 
 Update your Drone server configuration to include the plugin address and the shared secret.
